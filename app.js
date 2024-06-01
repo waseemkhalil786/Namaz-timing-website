@@ -39,10 +39,15 @@ document.querySelector(".btn").addEventListener("click", function (event) {
     "dhaka",
     "tehran",
     "istanbul",
+    "US",
+    "UK",
+    "Saudia",
+    "Canada",
+    "America"
   ];
   if (!nowCities.includes(inputcity)) {
     document.getElementById("answer").innerHTML =
-    "Plese enter correct city name!!.";
+      "Plese enter correct city name!!.";
     return;
   }
 
@@ -50,18 +55,20 @@ document.querySelector(".btn").addEventListener("click", function (event) {
   const apiAnswer = `https://api.aladhan.com/v1/timingsByCity/${date}?city=${inputcity}&country=Pakistan`;
 
   fetch(apiAnswer)
-  .then((response) => response.json())
-  .then((data) => {
-    if (data.code === 200) {
-      let timings = data.data.timings;
-      let prayerTimes = `
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200) {
+        let timings = data.data.timings;
+        let prayerTimes = `
         Fajr: ${timings.Fajr}<br><hr/>
         Dhuhr: ${timings.Dhuhr}<br><hr/>
         Asr: ${timings.Asr}<br><hr/>
         Maghrib: ${timings.Maghrib}<br><hr/>
         Isha: ${timings.Isha}<hr/>
       `;
-      document.getElementById("answer").innerHTML = `Date Of ${inputcity} (${date})<br>${prayerTimes}`;
+        document.getElementById(
+          "answer"
+        ).innerHTML = `Date Of ${inputcity} (${date})<br>${prayerTimes}`;
       } else {
         document.getElementById(
           "answer"
